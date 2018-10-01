@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angularInterceptors';
+  response: Observable<any>
+
+  constructor(private http: HttpClient){}
+
+  request() {
+    const url = 'https://jsonplaceholder.typicode.com/posts/1';
+    this.response = this.http.get(url, {observe: 'body'});
+  }
 }
